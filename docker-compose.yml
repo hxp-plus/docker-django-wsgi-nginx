@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+  web:
+    container_name: django
+    build: 
+      context: .
+      network: host
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn --certfile=/etc/certs/localhost.crt --keyfile=/etc/certs/localhost.key djangocompose.wsgi:application --bind 0.0.0.0:443"
+    volumes:
+      - ./src:/code
+      - ./certs:/etc/certs
+    expose: 
+      - "8080"
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./nginx_config:/etc/nginx/conf.d/
+      - ./certs:/etc/certs
+    depends_on:
+      - web
