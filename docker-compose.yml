@@ -20,5 +20,6 @@ services:
     volumes:
       - ./nginx_config:/etc/nginx/conf.d/
       - ./certs:/etc/certs
+      - ./nginx_files:/usr/share/nginx/html/
     depends_on:
       - web
