@@ -4,6 +4,8 @@ A demo of containerizing  django and nginx with self-signed cert and wsgi.
 ## Quick start
 
 ```
+chmod +x gen_cert.sh
+./gen_cert.sh # Generate Self-signed ssl cert for nginx
 sudo docker-compose up
 ```
 
@@ -18,3 +20,5 @@ sudo docker-compose up
 #### WSGI with Gunicorn.
 
 #### Nginx reverse proxy.
+
+#### Static script serving with nginx in `./nginx_files/scripts/`
